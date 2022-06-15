@@ -30,4 +30,6 @@ public class MainRestController {
     ) throws Exception{
         return boardService.selectAllBbsContents(bbsContentsReq);
     }
+
+
 }

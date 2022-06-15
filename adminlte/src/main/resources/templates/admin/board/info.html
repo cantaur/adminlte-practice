@@ -1,0 +1,62 @@
+{% extends "../template/layout" %}
+{% block title %}게시판관리{% endblock %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{{cp}}/admin/user/member">게시판관리</a></li>
+<li class="breadcrumb-item active">게시판관리</li>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div id="wrapper-user" class="col">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">게시판관리</h3>
+            </div>
+            <div class="card-body">
+                <div id="board">
+                    <form id="form-search" action="">
+                        <div>
+                            <div class="row form-group justify-content-end">
+                                <label for="search-groupId" class="d-none">조건</label >
+                                <div class="col-1">
+                                    <select id="datatable-search-se" name="se" class="form-control">
+                                        <option value="">검색조건</option>
+                                        <option value="userEmail">아이디</option>
+                                    </select>
+                                </div >
+                                <div class="col-2">
+                                    <label for="datatable-search" class="d-none">SEARCH</label>
+                                    <input id="datatable-search" name="keyword" type="text" class="form-control" placeholder="Enter keyword...">
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-outline-info btn-block btn-flat"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>게시판명</th>
+                            <th>게시물수</th>
+                            <th>사용유무</th>
+                            <th>게시물</th>
+                            <th>속성</th>
+                            <th>초기화</th>
+                            <th>삭제</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button id="add-manager" type="button" class="btn btn-default" ><i class="fa fa-plus mr-2"></i>New Manager</button>
+                <button id="btn-reset" type="button" class="btn btn-default"><i class="fa fa-sync mr-2"></i>reset</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+{% endblock %}

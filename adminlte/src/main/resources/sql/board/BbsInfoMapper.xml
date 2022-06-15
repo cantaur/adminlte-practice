@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cantaur.adminlte.mapper.board.BbsInfoMapper">
+
+    <select id="selectBbsInfoList" resultType="BbsInfo" parameterType="BbsInfoReq">
+        SELECT MAIN.*
+        FROM
+            (
+                SELECT @ROWNUM := @ROWNUM+1 AS RN, SUB.*
+                FROM
+                    (
+                    SELECT *
+                    FROM tb_bbs_info WHERE site_cd='3') SUB,
+                    (SELECT @ROWNUM := 0) R ORDER BY SUB.crdt DESC LIMIT 10) MAIN
+        WHERE MAIN.RN >= 0 ORDER BY MAIN.RN ASC
+
+    </select>
+
+
+
+
+</mapper>
