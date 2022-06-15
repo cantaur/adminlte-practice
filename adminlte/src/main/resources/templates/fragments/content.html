@@ -40,20 +40,20 @@
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th>Rendering engine</th>
-                                            <th>Browser</th>
-                                            <th>Platform(s)</th>
-                                            <th>Engine version</th>
-                                            <th>CSS grade</th>
+                                            <th>번호</th>
+                                            <th>제목</th>
+                                            <th>작성자</th>
+                                            <th>조회수</th>
+                                            <th>작성일</th>
                                         </tr>
                                         </thead>
                                         <tfoot>
                                         <tr>
-                                            <th>Rendering engine</th>
-                                            <th>Browser</th>
-                                            <th>Platform(s)</th>
-                                            <th>Engine version</th>
-                                            <th>CSS grade</th>
+                                            <th>번호</th>
+                                            <th>제목</th>
+                                            <th>작성자</th>
+                                            <th>조회수</th>
+                                            <th>작성일</th>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -98,13 +98,28 @@
 <script>
     $(function () {
         $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+            ordering: true,
+            pagingType : "full_numbers",
+            paging : true,
+            lengthChange : false,
+            searching : false,
+            info : true,
+            autoWidth : false,
+            responsive : true,
+            ajax: {
+                url : "/bbs/contents/client",
+                dataSrc: ''
+            },
+            on: {
+                draw : "draw"
+            },
+            columns: [
+                {data : "seqNo"} ,
+                {data : "subject"},
+                {data : "creatorNm"},
+                {data : "hitCount"},
+                {data : "crdt"}
+            ]
         });
     });
 </script>
