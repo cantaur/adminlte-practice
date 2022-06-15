@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cantaur.adminlte.mapper.board.BbsContentsMapper">
+
+    <select id="countTotalBbsContents" resultType="int" parameterType="BbsContentsReq">
+        SELECT
+            count(1)
+        FROM
+            tb_bbs_contents
+        WHERE
+            1=1
+            AND site_cd = #{siteCd}
+            AND bbs_id=#{bbsId}
+    </select>
+
+    <select id="countBbsContents" resultType="int" parameterType="BbsContentsReq">
+        SELECT
+            count(1)
+        FROM
+            tb_bbs_contents
+        WHERE
+            1=1
+            AND site_cd = #{siteCd}
+            AND bbs_id=#{bbsId}
+            <if test="searchType!=null and searchType !='' and  searchValue != null and searchValue !='' " >
+                <if test="searchType.equalsIgnoreCase('subject') " >
+                    AND subject LIKE CONCAT('%',#{searchValue},'%')
+                </if>
+                <if test="searchType.equalsIgnoreCase('contents') " >
+                    AND contents LIKE CONCAT('%',#{searchValue},'%')
+                </if>
+                <if test="searchType.equalsIgnoreCase('regId') " >
+                    AND LOWER(creator) LIKE CONCAT('%',#{searchValue},'%')
+                </if>
+                <if test="searchType.equalsIgnoreCase('regNm') " >
+                    AND creator_nm LIKE CONCAT('%',#{searchValue},'%')
+                </if>
+            </if>
+    </select>
+
+
+    <select id="selectAllBbsContents" resultType="BbsContents" parameterType="BbsContentsReq">
+        SELECT
+            *
+        FROM
+                tb_bbs_contents
+        WHERE
+            1=1
+            AND site_cd = #{siteCd}
+            AND bbs_id=#{bbsId}
+        ORDER BY contents_type ASC,
+                 bbs_no        DESC,
+                 order_no      ASC,
+                 seq_no        DESC
+    </select>
+
+    <select id="selectBbsContentsPageList" resultType="BbsContents" parameterType="BbsContentsReq">
+        SELECT
+            *
+        FROM
+            tb_bbs_contents
+        WHERE
+            1=1
+            AND site_cd = #{siteCd}
+            AND bbs_id=#{bbsId}
+            <if test="searchType!=null and searchType !='' and  searchValue != null and searchValue !='' " >
+                <if test="searchType.equalsIgnoreCase('subject') " >
+                    AND subject LIKE CONCAT('%',#{searchValue},'%')
+                </if>
+                <if test="searchType.equalsIgnoreCase('contents') " >
+                    AND contents LIKE CONCAT('%',#{searchValue},'%')
+                </if>
+                <if test="searchType.equalsIgnoreCase('regId') " >
+                    AND LOWER(creator) LIKE CONCAT('%',#{searchValue},'%')
+                </if>
+                <if test="searchType.equalsIgnoreCase('regNm') " >
+                    AND creator_nm LIKE CONCAT('%',#{searchValue},'%')
+                </if>
+            </if>
+        ORDER BY contents_type ASC,
+        bbs_no        DESC,
+        order_no      ASC,
+        seq_no        DESC
+        LIMIT #{start}, #{pageSize}
+    </select>
+
+
+</mapper>
