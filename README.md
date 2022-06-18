@@ -1,2 +1,2 @@
-# adminLTE
-adminLTE 적용해보기
+# AdminLTE
+AdminLTE 적용해보기
